@@ -87,21 +87,21 @@
     <iframe id="calendarFrame" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // 🔥 Ambil elemen judul
-            const titleElement = document.getElementById("todayTitle");
+        document.addEventListener("DOMContentLoaded", function () {
+    const eventsTitle = document.getElementById("eventsTitle");
 
-            // 🔥 Ambil tanggal hari ini sesuai lokal pengguna
-            const today = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const formattedDate = today.toLocaleDateString(navigator.language, options);
+    // Format tanggal hari ini
+    const today = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = today.toLocaleDateString('en-US', options);
 
-            // 🔥 Update teks judul agar menampilkan tanggal
-            titleElement.innerHTML = `🔥 Today Fogo Events - ${formattedDate} 🔥`;
+    // Ubah teks h2 menjadi "Today's Events - [Tanggal Hari Ini]"
+    eventsTitle.innerHTML = `🔥 Today’s Events - ${formattedDate} 🔥`;
 
-            // 🔥 Warna tulisan berubah setiap kali halaman dimuat
-            const colors = ["#ff5733", "#33ff57", "#3357ff", "#ff33a8", "#f39c12"];
-            titleElement.style.color = colors[Math.floor(Math.random() * colors.length)];
+    // Pilih warna acak untuk teks
+    const colors = ["#ff5733", "#33ff57", "#3357ff", "#ff33a8", "#f39c12"];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    eventsTitle.style.color = randomColor;
 
             // 🔥 Set timezone pengguna
             const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
