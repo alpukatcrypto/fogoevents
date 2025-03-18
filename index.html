@@ -69,10 +69,12 @@
     <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FSingapore&showPrint=0&src=Mjg3MDI2YTk5Y2IxMGY3Mzc5MGM1ZGJjZWJmYzc2YTEyZTU2NDA3OWUwMmYzYjNiZTE2MWI3NTJiN2Q3OGY1NkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23E4C441" style="border-width:0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
 
     <script>
-        // Set timezone sesuai pengguna
-        const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        document.getElementById("calendarFrame").src = 
-            `https://calendar.google.com/calendar/embed?src=287026a99cb10f73790c5dbcebfc76a12e564079e02f3b3be161b752b7d78f56@group.calendar.google.com&ctz=${userTimezone}`;
-    </script>
+
+    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+  
+    document.getElementById("calendarFrame").src = 
+        `https://calendar.google.com/calendar/embed?src=287026a99cb10f73790c5dbcebfc76a12e564079e02f3b3be161b752b7d78f56@group.calendar.google.com&ctz=${userTimezone}`;
+</script>
 </body>
 </html>
