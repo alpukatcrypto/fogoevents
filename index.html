@@ -67,7 +67,10 @@
 
     <h2>Calendar</h2>
    <iframe src="https://calendar.google.com/calendar/embed?src=287026a99cb10f73790c5dbcebfc76a12e564079e02f3b3be161b752b7d78f56%40group.calendar.google.com&ctz=Asia%2FJakarta" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
-    document.addEventListener("DOMContentLoaded", function() {
+
+<script>
+      
+      document.addEventListener("DOMContentLoaded", function() {
       
         const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -78,6 +81,28 @@
         document.getElementById("calendarFrame").src = 
             `https://calendar.google.com/calendar/embed?src=${calendarID}&ctz=${userTimezone}`;
     });
+</script>
+ <script>
+    // Ambil elemen h1
+    const titleElement = document.getElementById("todayTitle");
+
+    // Ambil tanggal hari ini
+    const today = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = today.toLocaleDateString('en-US', options);
+
+    // Update teks agar menampilkan tanggal
+    titleElement.innerHTML = `🔥 Today Fogo Events - ${formattedDate} 🔥`;
+
+    // Tambahkan warna & efek CSS
+    titleElement.style.color = "#ff5733";  // Warna merah-oranye
+    titleElement.style.fontSize = "28px";  // Ukuran lebih besar
+    titleElement.style.fontWeight = "bold";
+    titleElement.style.textAlign = "center";  // Tengah
+    titleElement.style.padding = "10px";
+    titleElement.style.borderRadius = "8px";
+    titleElement.style.backgroundColor = "#f8f8f8"; // Background terang
+    titleElement.style.boxShadow = "0px 4px 8px rgba(0,0,0,0.1)"; // Efek bayangan
 </script>
    
 
