@@ -4,6 +4,19 @@
       <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fogo Events Today</title>
+   <style>
+        /* Styling untuk judul */
+        #todayTitle {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #f8f8f8;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+
     <script defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
     <script>
         const API_KEY = 'AIzaSyDjVXwUbLWZv052kRzAXmjvxEWTGuY7BLw'; 
@@ -69,7 +82,24 @@
    <iframe src="https://calendar.google.com/calendar/embed?src=287026a99cb10f73790c5dbcebfc76a12e564079e02f3b3be161b752b7d78f56%40group.calendar.google.com&ctz=Asia%2FJakarta" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
 
 <script>
-      
+      // 1️⃣ 
+        const titleElement = document.getElementById("todayTitle");
+
+        // 2️⃣ 
+        const today = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = today.toLocaleDateString('en-US', options);
+
+        // 3️⃣ 
+        titleElement.innerHTML = `🔥 Today Fogo Events - ${formattedDate} 🔥`;
+
+        // 4️⃣ 
+        const colors = ["#ff5733", "#33ff57", "#3357ff", "#ff33a8", "#f39c12"];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        titleElement.style.color = randomColor;
+
+
+      //
       document.addEventListener("DOMContentLoaded", function() {
       
         const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -82,29 +112,7 @@
             `https://calendar.google.com/calendar/embed?src=${calendarID}&ctz=${userTimezone}`;
     });
 </script>
- <script>
-    // Ambil elemen h1
-    const titleElement = document.getElementById("todayTitle");
 
-    // Ambil tanggal hari ini
-    const today = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = today.toLocaleDateString('en-US', options);
-
-    // Update teks agar menampilkan tanggal
-    titleElement.innerHTML = `🔥 Today Fogo Events - ${formattedDate} 🔥`;
-
-    // Tambahkan warna & efek CSS
-    titleElement.style.color = "#ff5733";  // Warna merah-oranye
-    titleElement.style.fontSize = "28px";  // Ukuran lebih besar
-    titleElement.style.fontWeight = "bold";
-    titleElement.style.textAlign = "center";  // Tengah
-    titleElement.style.padding = "10px";
-    titleElement.style.borderRadius = "8px";
-    titleElement.style.backgroundColor = "#f8f8f8"; // Background terang
-    titleElement.style.boxShadow = "0px 4px 8px rgba(0,0,0,0.1)"; // Efek bayangan
-</script>
-   
 
 
 
