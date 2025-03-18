@@ -14,6 +14,15 @@
             border-radius: 10px;
             background-color: #f8f8f8;
             box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+            color: #2c3e50;
+        }
+
+        /* Styling untuk h2 (Today’s Events) */
+        #eventsTitle {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
         }
     </style>
 
@@ -79,7 +88,7 @@
     <h1 id="todayTitle"></h1>
 
     <!-- 🔥 Event Hari Ini -->
-    <h2>Today’s Events</h2>
+    <h2 id="eventsTitle">Today’s Events</h2>
     <ul id="events">Loading events...</ul>
 
     <!-- 🔥 Google Calendar -->
@@ -88,24 +97,29 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-    const eventsTitle = document.getElementById("eventsTitle");
+            // 🔥 Ambil elemen judul event
+            const eventsTitle = document.getElementById("eventsTitle");
 
-    // Format tanggal hari ini
-    const today = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = today.toLocaleDateString('en-US', options);
+            // Format tanggal hari ini
+            const today = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = today.toLocaleDateString('en-US', options);
 
-    // Ubah teks h2 menjadi "Today's Events - [Tanggal Hari Ini]"
-    eventsTitle.innerHTML = `🔥 Today’s Events - ${formattedDate} 🔥`;
+            // Ubah teks h2 menjadi "Today's Events - [Tanggal Hari Ini]"
+            eventsTitle.innerHTML = `🔥 Today’s Events - ${formattedDate} 🔥`;
 
-    // Pilih warna acak untuk teks
-    const colors = ["#ff5733", "#33ff57", "#3357ff", "#ff33a8", "#f39c12"];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    eventsTitle.style.color = randomColor;
+            // Pilih warna acak untuk teks h2
+            const colors = ["#ff5733", "#33ff57", "#3357ff", "#ff33a8", "#f39c12"];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            eventsTitle.style.color = randomColor;
 
-            // 🔥 Set timezone pengguna
+            // 🔥 Set #todayTitle agar menampilkan tanggal
+            const todayTitle = document.getElementById("todayTitle");
+            todayTitle.innerHTML = `📅 ${formattedDate}`;
+
+            // 🔥 Atur Google Calendar berdasarkan timezone pengguna
             const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            const calendarID = "287026a99cb10f73790c5dbcebfc76a12e564079e02f3b3be161b752b7d78f56@group.calendar.google.com"; // Ganti dengan Google Calendar ID kamu
+            const calendarID = "287026a99cb10f73790c5dbcebfc76a12e564079e02f3b3be161b752b7d78f56@group.calendar.google.com"; // Ganti dengan Calendar ID kamu
             document.getElementById("calendarFrame").src = 
                 `https://calendar.google.com/calendar/embed?src=${calendarID}&ctz=${encodeURIComponent(userTimezone)}`;
         });
