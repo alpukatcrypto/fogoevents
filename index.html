@@ -55,7 +55,17 @@
     </script>
 </head>
 <body>
-    <h1>Fogo events</h1>
-    <iframe src="https://calendar.google.com/calendar/embed?src=287026a99cb10f73790c5dbcebfc76a12e564079e02f3b3be161b752b7d78f56%40group.calendar.google.com&ctz=Asia%2FJakarta" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    <h1>Today fogo events</h1>
+    <ul id="events">this...</ul>
+
+    <h2>Calendar</h2>
+    <iframe id="calendarFrame" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+
+    <script>
+        // Set timezone sesuai pengguna
+        const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.getElementById("calendarFrame").src = 
+            `https://calendar.google.com/calendar/embed?src=287026a99cb10f73790c5dbcebfc76a12e564079e02f3b3be161b752b7d78f56@group.calendar.google.com&ctz=${userTimezone}`;
+    </script>
 </body>
 </html>
