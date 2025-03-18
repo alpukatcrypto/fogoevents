@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-      <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fogo Events Today</title>
-   <style>
+    <style>
         /* Styling untuk judul */
         #todayTitle {
             text-align: center;
@@ -35,13 +35,13 @@
 
         function getEvents() {
             const now = new Date();
-            const todayStart = new Date(now.setHours(0, 0, 0, 0)).toISOString(); // 00:00 hari ini
-            const todayEnd = new Date(now.setHours(23, 59, 59, 999)).toISOString(); // 23:59 hari ini
+            const todayStart = new Date().setHours(0, 0, 0, 0);
+            const todayEnd = new Date().setHours(23, 59, 59, 999);
 
             gapi.client.calendar.events.list({
                 'calendarId': CALENDAR_ID,
-                'timeMin': todayStart,
-                'timeMax': todayEnd,
+                'timeMin': new Date(todayStart).toISOString(),
+                'timeMax': new Date(todayEnd).toISOString(),
                 'showDeleted': false,
                 'singleEvents': true,
                 'orderBy': 'startTime'
@@ -54,7 +54,6 @@
                     events.forEach(event => {
                         const li = document.createElement('li');
 
-                       
                         const eventTime = new Date(event.start.dateTime || event.start.date);
                         const localTime = new Intl.DateTimeFormat(navigator.language, {
                             dateStyle: 'full',
@@ -75,46 +74,42 @@
     </script>
 </head>
 <body>
-    <h1>Today fogo events</h1>
-    <ul id="events">...</ul>
 
+    <!-- 🔥 Judul dengan tanggal -->
+    <h1 id="todayTitle"></h1>
+
+    <!-- 🔥 Event Hari Ini -->
+    <h2>Today’s Events</h2>
+    <ul id="events">Loading events...</ul>
+
+    <!-- 🔥 Google Calendar -->
     <h2>Calendar</h2>
-   <iframe src="https://calendar.google.com/calendar/embed?src=287026a99cb10f73790c5dbcebfc76a12e564079e02f3b3be161b752b7d78f56%40group.calendar.google.com&ctz=Asia%2FJakarta" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+    <iframe id="calendarFrame" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
 
-<script>
-      // 1️⃣ 
-        const titleElement = document.getElementById("todayTitle");
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 🔥 Ambil elemen judul
+            const titleElement = document.getElementById("todayTitle");
 
-        // 2️⃣ 
-        const today = new Date();
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const formattedDate = today.toLocaleDateString('en-US', options);
+            // 🔥 Ambil tanggal hari ini sesuai lokal pengguna
+            const today = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = today.toLocaleDateString(navigator.language, options);
 
-        // 3️⃣ 
-        titleElement.innerHTML = `🔥 Today Fogo Events - ${formattedDate} 🔥`;
+            // 🔥 Update teks judul agar menampilkan tanggal
+            titleElement.innerHTML = `🔥 Today Fogo Events - ${formattedDate} 🔥`;
 
-        // 4️⃣ 
-        const colors = ["#ff5733", "#33ff57", "#3357ff", "#ff33a8", "#f39c12"];
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        titleElement.style.color = randomColor;
+            // 🔥 Warna tulisan berubah setiap kali halaman dimuat
+            const colors = ["#ff5733", "#33ff57", "#3357ff", "#ff33a8", "#f39c12"];
+            titleElement.style.color = colors[Math.floor(Math.random() * colors.length)];
 
-
-      //
-      document.addEventListener("DOMContentLoaded", function() {
-      
-        const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-        
-        const calendarID = "287026a99cb10f73790c5dbcebfc76a12e564079e02f3b3be161b752b7d78f56@group.calendar.google.com"; // Pastikan ini sesuai dengan Calendar ID-mu
-
-   
-        document.getElementById("calendarFrame").src = 
-            `https://calendar.google.com/calendar/embed?src=${calendarID}&ctz=${userTimezone}`;
-    });
-</script>
-
-
-
+            // 🔥 Set timezone pengguna
+            const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            const calendarID = "287026a99cb10f73790c5dbcebfc76a12e564079e02f3b3be161b752b7d78f56@group.calendar.google.com"; // Ganti dengan Google Calendar ID kamu
+            document.getElementById("calendarFrame").src = 
+                `https://calendar.google.com/calendar/embed?src=${calendarID}&ctz=${encodeURIComponent(userTimezone)}`;
+        });
+    </script>
 
 </body>
 </html>
