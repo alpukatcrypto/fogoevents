@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fogo Events Today</title>
     <style>
-        /* Styling untuk judul */
+         /* Styling untuk judul */
         #todayTitle {
             text-align: center;
             font-size: 28px;
@@ -13,7 +13,7 @@
             padding: 15px;
             border-radius: 10px;
             background-color: #f8f8f8;
-            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
             color: #2c3e50;
         }
 
@@ -24,6 +24,7 @@
             font-weight: bold;
             margin-top: 20px;
         }
+
         /* Styling untuk list event */
         #events {
             list-style-type: none;
@@ -34,11 +35,17 @@
         #events li {
             font-size: 20px; /* 🔥 Memperbesar teks isi event */
             font-weight: bold;
-            padding: 10px;
-            margin: 5px 0;
-            background-color: #f1f1f1;
-            border-radius: 8px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 12px;
+            margin: 8px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            max-width: 600px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* 🔥 Shadow lebih smooth */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #events li:hover {
+            transform: scale(1.05); /* 🔥 Efek hover untuk memperjelas event */
         }
     </style>
 
@@ -81,12 +88,12 @@
 
                         const eventTime = new Date(event.start.dateTime || event.start.date);
                         const localTime = new Intl.DateTimeFormat(navigator.language, {
-                            dateStyle: 'full',
-                            timeStyle: 'short',
+                            hour: '2-digit',
+                            minute: '2-digit',
                             timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
                         }).format(eventTime);
 
-                        li.innerHTML = `<strong>${event.summary}</strong> - ${localTime}`;
+                        li.innerHTML = `<strong>${event.summary}</strong> - ⏰ ${localTime}`;
                         eventsList.appendChild(li);
                     });
                 } else {
