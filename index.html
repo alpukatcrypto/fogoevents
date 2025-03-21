@@ -23,12 +23,6 @@
             text-align: center;
         }
 
-        @keyframes neonGlow {
-            0% { text-shadow: 0 0 5px #FFD700, 0 0 10px #FFA500, 0 0 15px #FF4500; }
-            50% { text-shadow: 0 0 10px #FFD700, 0 0 20px #FFA500, 0 0 30px #FF4500; }
-            100% { text-shadow: 0 0 5px #FFD700, 0 0 10px #FFA500, 0 0 15px #FF4500; }
-        }
-
         #todayTitle {
             font-size: 48px;
             font-weight: bold;
@@ -39,7 +33,6 @@
             background: linear-gradient(90deg, #FFD700, #FFA500, #FF4500);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: neonGlow 1.5s infinite alternate ease-in-out;
         }
 
         #eventsContainer {
@@ -77,12 +70,39 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        #showMore, #showLess {
+            cursor: pointer;
+            background: #ff4500;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 15px;
+            transition: 0.3s ease-in-out;
+            font-weight: bold;
+        }
+
+        #showMore:hover, #showLess:hover {
+            background: #ff7700;
+            transform: scale(1.1);
+        }
+
+        #calendarFrame {
+            width: 90%;
+            height: 600px;
+            border: 0;
+            box-shadow: 0px 0px 30px rgba(255, 69, 0, 0.7);
+            border-radius: 10px;
+        }
     </style>
 
     <script defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
     <script>
-        const API_KEY = 'AIzaSyDjVXwUbLWZv052kRzAXmjvxEWTGuY7BLw'; 
-        const CALENDAR_ID = '287026a99cb10f73790c5dbcebfc76a12e564079e02f3b3be161b752b7d78f56@group.calendar.google.com'; 
+        const API_KEY = 'AIzaSyBYfwdWZ8I1Bk0i9Soe4xWbUD0H1ORjZp4';
+        const CALENDAR_ID = 'c8000a117de739137472538d9a44c41c8f07eafcc3f8e7bb2e97877d0db6119b@group.calendar.google.com';
+		
+
         function gapiLoaded() {
             gapi.load('client', loadClient);
         }
@@ -134,6 +154,8 @@
 
                 if (count === 0) {
                     eventsList.innerHTML = '<li class="show">No Events 😴</li>';
+                } else {
+                    document.getElementById('showMore').style.display = 'inline-block';
                 }
             }).catch(error => {
                 console.error("Error fetching events:", error);
@@ -145,7 +167,11 @@
     <h1 id="todayTitle">⚡ Fogo Events ⚡</h1>
     <div id="eventsContainer">
         <ul id="events">Loading events...</ul>
+        <span id="showMore" style="display: none;">See all</span>
+        <span id="showLess" style="display: none;">Close</span>
     </div>
+    <h2 id="calendarTitle">Calendar</h2>
+    <iframe id="calendarFrame" src=""></iframe>
     <p id="footer">Made with ❤️ by Intern</p>
 </body>
 </html>
