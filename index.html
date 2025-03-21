@@ -190,8 +190,9 @@
                         minute: '2-digit',
                         timeZone: userTimezone
                     }).format(eventTime);
-			const description = event.description ? ` - ${event.description}` : '';
-                        li.innerHTML = `<strong>${event.summary}</strong> - ⏰ ${localTime} 📍${description}`;
+			const description = event.description ? `📍${event.description}` : '';
+			li.innerHTML = `<strong>${event.summary}</strong> - ⏰ ${localTime} - ${description}`;
+
                     if (count < 3) li.classList.add('show');
                     eventsList.appendChild(li);
                     count++;
