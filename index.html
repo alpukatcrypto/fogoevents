@@ -129,7 +129,6 @@
                 const events = response.result.items;
                 const eventsList = document.getElementById('events');
                 eventsList.innerHTML = '';
-
                 let count = 0;
 
                 events.forEach((event) => {
@@ -161,6 +160,24 @@
                 console.error("Error fetching events:", error);
             });
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("calendarFrame").src = `https://calendar.google.com/calendar/embed?src=${CALENDAR_ID}&ctz=${encodeURIComponent(Intl.DateTimeFormat().resolvedOptions().timeZone)}`;
+
+            document.getElementById("showMore").addEventListener("click", function () {
+                document.querySelectorAll("#events li").forEach(li => li.classList.add('show'));
+                document.getElementById("showMore").style.display = "none";
+                document.getElementById("showLess").style.display = "inline-block";
+            });
+
+            document.getElementById("showLess").addEventListener("click", function () {
+                document.querySelectorAll("#events li").forEach((li, index) => {
+                    if (index >= 3) li.classList.remove('show');
+                });
+                document.getElementById("showMore").style.display = "inline-block";
+                document.getElementById("showLess").style.display = "none";
+            });
+        });
     </script>
 </head>
 <body>
@@ -171,7 +188,7 @@
         <span id="showLess" style="display: none;">Close</span>
     </div>
     <h2 id="calendarTitle">Calendar</h2>
-    <iframe id="calendarFrame" src=""></iframe>
+    <iframe id="calendarFrame"></iframe>
     <p id="footer">Made with ❤️ by Intern</p>
 </body>
 </html>
