@@ -3,56 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fogo Events Today</title>
+    <title> Fogo Events ⚡</title>
+
     <style>
-         /* Styling untuk judul */
-        #todayTitle {
-            text-align: center;
-            font-size: 28px;
-            font-weight: bold;
-            padding: 15px;
-            border-radius: 10px;
-            background-color: #f8f8f8;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-            color: #2c3e50;
+        @keyframes fireEffect {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* Styling untuk h2 (Today’s Events) */
-        #eventsTitle {
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-
-        /* Styling untuk list event */
-        #events {
-            list-style-type: none;
+        body {
+            background: linear-gradient(-45deg, #0a0a0a, #290f0f, #662200, #0a0a0a);
+            background-size: 400% 400%;
+            animation: fireEffect 12s infinite ease-in-out;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
             padding: 0;
             text-align: center;
         }
 
-        #events li {
-            font-size: 20px; /* 🔥 Memperbesar teks isi event */
+        #todayTitle {
+            font-size: 42px;
             font-weight: bold;
-            padding: 12px;
-            margin: 8px auto;
-            background-color: #fff;
-            border-radius: 10px;
-            max-width: 600px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2); /* 🔥 Shadow lebih smooth */
-            transition: transform 0.3s ease-in-out;
+            padding: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #FFD700, #FFA500, #FF4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: neonGlow 1.5s infinite alternate ease-in-out;
         }
 
-        #events li:hover {
-            transform: scale(1.05); /* 🔥 Efek hover untuk memperjelas event */
+        #eventsContainer {
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 69, 0, 0.1);
+            box-shadow: inset 0px 0px 15px rgba(255, 140, 0, 0.5);
+            margin: auto;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        #events li {
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+            margin: 10px auto;
+            background: linear-gradient(90deg, #220b05, #ff4500, #ff7700);
+            color: white;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        #events li.show {
+            display: block !important;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #calendarFrame {
+            width: 90%;
+            height: 600px;
+            border: 0;
+            box-shadow: 0px 0px 30px rgba(255, 69, 0, 0.7);
+            border-radius: 10px;
+            loading: lazy;
+        }
+
+        @media (max-width: 768px) {
+            #todayTitle { font-size: 30px; }
+            #events li { font-size: 16px; padding: 8px; }
+            #calendarFrame { width: 100%; height: 400px; }
         }
     </style>
 
     <script defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
     <script>
-        const API_KEY = 'AIzaSyDjVXwUbLWZv052kRzAXmjvxEWTGuY7BLw'; 
-        const CALENDAR_ID = '287026a99cb10f73790c5dbcebfc76a12e564079e02f3b3be161b752b7d78f56@group.calendar.google.com'; 
+       <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Fogo Events ⚡</title>
+
+    <style>
+        @keyframes fireEffect {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            background: linear-gradient(-45deg, #0a0a0a, #290f0f, #662200, #0a0a0a);
+            background-size: 400% 400%;
+            animation: fireEffect 12s infinite ease-in-out;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        #todayTitle {
+            font-size: 42px;
+            font-weight: bold;
+            padding: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #FFD700, #FFA500, #FF4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: neonGlow 1.5s infinite alternate ease-in-out;
+        }
+
+        #eventsContainer {
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 69, 0, 0.1);
+            box-shadow: inset 0px 0px 15px rgba(255, 140, 0, 0.5);
+            margin: auto;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        #events li {
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+            margin: 10px auto;
+            background: linear-gradient(90deg, #220b05, #ff4500, #ff7700);
+            color: white;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        #events li.show {
+            display: block !important;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #calendarFrame {
+            width: 90%;
+            height: 600px;
+            border: 0;
+            box-shadow: 0px 0px 30px rgba(255, 69, 0, 0.7);
+            border-radius: 10px;
+            loading: lazy;
+        }
+
+        @media (max-width: 768px) {
+            #todayTitle { font-size: 30px; }
+            #events li { font-size: 16px; padding: 8px; }
+            #calendarFrame { width: 100%; height: 400px; }
+        }
+    </style>
+
+    <script defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+    <script>
+       const API_KEY = 'AIzaSyDjVXwUbLWZv052kRzAXmjvxEWTGuY7BLw';
+        const CALENDAR_ID = '287026a99cb10f73790c5dbcebfc76a12e564079e02f3b3be161b752b7d78f56@group.calendar.google.com';
 
         function gapiLoaded() {
             gapi.load('client', loadClient);
@@ -62,18 +181,17 @@
             gapi.client.init({
                 apiKey: API_KEY,
                 discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
-            }).then(() => getEvents());
+            }).then(() => getEvents()).catch(() => displayError());
         }
 
         function getEvents() {
             const now = new Date();
-            const todayStart = new Date().setHours(0, 0, 0, 0);
-            const todayEnd = new Date().setHours(23, 59, 59, 999);
+            const todayStr = now.toISOString().split('T')[0];
+            const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
             gapi.client.calendar.events.list({
                 'calendarId': CALENDAR_ID,
-                'timeMin': new Date(todayStart).toISOString(),
-                'timeMax': new Date(todayEnd).toISOString(),
+                'timeMin': now.toISOString(),
                 'showDeleted': false,
                 'singleEvents': true,
                 'orderBy': 'startTime'
@@ -81,72 +199,117 @@
                 const events = response.result.items;
                 const eventsList = document.getElementById('events');
                 eventsList.innerHTML = '';
+                let count = 0;
 
-                if (events.length > 0) {
-                    events.forEach(event => {
+                events.forEach((event) => {
+                    const eventTime = new Date(event.start.dateTime || event.start.date);
+                    const eventDateStr = eventTime.toISOString().split('T')[0];
+
+                    if (eventDateStr === todayStr && eventTime > now) {
                         const li = document.createElement('li');
-
-                        const eventTime = new Date(event.start.dateTime || event.start.date);
                         const localTime = new Intl.DateTimeFormat(navigator.language, {
                             hour: '2-digit',
                             minute: '2-digit',
-                            timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+                            timeZone: userTimezone
                         }).format(eventTime);
 
-                        li.innerHTML = `<strong>${event.summary}</strong> - ⏰ ${localTime}`;
+                        li.innerHTML = ` <strong>${event.summary}</strong> - ⏰ ${localTime}`;
+                        if (count < 3) li.classList.add('show');
                         eventsList.appendChild(li);
-                    });
-                } else {
-                    eventsList.innerHTML = '<li>No Events Today</li>';
+                        count++;
+                    }
+                });
+
+                if (count === 0) {
+                    eventsList.innerHTML = '<li class="show">No Events 😴</li>';
                 }
-            }).catch(error => {
-                console.error("Error fetching events:", error);
-            });
+            }).catch(() => displayError());
+        }
+
+        function displayError() {
+            document.getElementById('events').innerHTML = '<li class="show" style="color: red;">⚠ Failed to load events. Try again later.</li>';
         }
     </script>
 </head>
 <body>
-
-    <!-- 🔥 Judul dengan tanggal -->
-    <h1 id="todayTitle"></h1>
-
-    <!-- 🔥 Event Hari Ini -->
-    <h2 id="eventsTitle">Today’s Events</h2>
-    <ul id="events">Loading events...</ul>
-
-    <!-- 🔥 Google Calendar -->
+    <h1 id="todayTitle">⚡ Fogo Events ⚡</h1>
+    <h2>Today's Events</h2>
+    <div id="eventsContainer">
+        <ul id="events">Loading events...</ul>
+    </div>
     <h2>Calendar</h2>
-    <iframe id="calendarFrame" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+    <iframe id="calendarFrame"></iframe>
+    <p id="footer">Made with ❤️ by Intern</p>
+</body>
+</html>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // 🔥 Ambil elemen judul event
-            const eventsTitle = document.getElementById("eventsTitle");
 
-            // Format tanggal hari ini
-            const today = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const formattedDate = today.toLocaleDateString('en-US', options);
+        function gapiLoaded() {
+            gapi.load('client', loadClient);
+        }
 
-            // Ubah teks h2 menjadi "Today's Events - [Tanggal Hari Ini]"
-            eventsTitle.innerHTML = `🔥 Today’s Events  🔥`;
+        function loadClient() {
+            gapi.client.init({
+                apiKey: API_KEY,
+                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
+            }).then(() => getEvents()).catch(() => displayError());
+        }
 
-            // Pilih warna acak untuk teks h2
-            const colors = ["#ff5733", "#33ff57", "#3357ff", "#ff33a8", "#f39c12"];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            eventsTitle.style.color = randomColor;
-
-            // 🔥 Set #todayTitle agar menampilkan tanggal
-            const todayTitle = document.getElementById("todayTitle");
-            todayTitle.innerHTML = `📅 ${formattedDate}`;
-
-            // 🔥 Atur Google Calendar berdasarkan timezone pengguna
+        function getEvents() {
+            const now = new Date();
+            const todayStr = now.toISOString().split('T')[0];
             const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            const calendarID = "287026a99cb10f73790c5dbcebfc76a12e564079e02f3b3be161b752b7d78f56@group.calendar.google.com"; // Ganti dengan Calendar ID kamu
-            document.getElementById("calendarFrame").src = 
-                `https://calendar.google.com/calendar/embed?src=${calendarID}&ctz=${encodeURIComponent(userTimezone)}`;
-        });
-    </script>
 
+            gapi.client.calendar.events.list({
+                'calendarId': CALENDAR_ID,
+                'timeMin': now.toISOString(),
+                'showDeleted': false,
+                'singleEvents': true,
+                'orderBy': 'startTime'
+            }).then(response => {
+                const events = response.result.items;
+                const eventsList = document.getElementById('events');
+                eventsList.innerHTML = '';
+                let count = 0;
+
+                events.forEach((event) => {
+                    const eventTime = new Date(event.start.dateTime || event.start.date);
+                    const eventDateStr = eventTime.toISOString().split('T')[0];
+
+                    if (eventDateStr === todayStr && eventTime > now) {
+                        const li = document.createElement('li');
+                        const localTime = new Intl.DateTimeFormat(navigator.language, {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            timeZone: userTimezone
+                        }).format(eventTime);
+
+                        li.innerHTML = ` <strong>${event.summary}</strong> - ⏰ ${localTime}`;
+                        if (count < 3) li.classList.add('show');
+                        eventsList.appendChild(li);
+                        count++;
+                    }
+                });
+
+                if (count === 0) {
+                    eventsList.innerHTML = '<li class="show">No Events 😴</li>';
+                }
+            }).catch(() => displayError());
+        }
+
+        function displayError() {
+            document.getElementById('events').innerHTML = '<li class="show" style="color: red;">⚠ Failed to load events. Try again later.</li>';
+        }
+    </script>
+</head>
+<body>
+    <h1 id="todayTitle">⚡ Fogo Events ⚡</h1>
+    <h2>Today's Events</h2>
+    <div id="eventsContainer">
+        <ul id="events">Loading events...</ul>
+    </div>
+    <h2>Calendar</h2>
+    <iframe id="calendarFrame"></iframe>
+    <p id="footer">Made with ❤️ by Intern</p>
 </body>
 </html>
