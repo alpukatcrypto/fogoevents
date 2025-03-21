@@ -71,6 +71,14 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        #calendarFrame {
+            width: 90%;
+            height: 600px;
+            border: 0;
+            box-shadow: 0px 0px 30px rgba(255, 69, 0, 0.7);
+            border-radius: 10px;
+        }
     </style>
 
     <script defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
@@ -121,7 +129,7 @@
                         
                         const description = event.description ? `<br><em>${event.description}</em>` : '';
 
-                        li.innerHTML = `<strong>${event.summary}</strong> - ⏰ ${localTime} ${description}`;
+                        li.innerHTML = `<strong>${event.summary}</strong><br>⏰ ${localTime} ${description}`;
                         
                         if (count < 3) li.classList.add('show');
                         eventsList.appendChild(li);
@@ -131,8 +139,6 @@
 
                 if (count === 0) {
                     eventsList.innerHTML = '<li class="show">No Events 😴</li>';
-                } else {
-                    document.getElementById('showMore').style.display = 'inline-block';
                 }
             }).catch(error => {
                 console.error("Error fetching events:", error);
@@ -147,8 +153,6 @@
     <h2 id="eventsTitle">Today's Events</h2>
     <div id="eventsContainer">
         <ul id="events">Loading events...</ul>
-        <span id="showMore" style="display: none;">See all</span>
-        <span id="showLess" style="display: none;">Close</span>
     </div>
 
     <h2 id="calendarTitle">Calendar</h2>
